@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		div{
+			position: absolute;
+			color:black;
+			font-weight: bold;
+			font-size: 50px;
+			border-radius: 1px;
+			display: none;
+			box-shadow: 0px 0px 5px 5px;
+			border: 1px solid #ccc;
+		}
+	</style>
+</head>
+<body>
+	
+<script>
+	function getPos(ev){
+
+		var scrollTop = document.documentElement.scrollTop||document.body.scrollTop;
+		var scrollLeft = document.documentElement.scrollLeft||document.body.scrollLeft;
+			return {x:ev.clientX+scrollLeft,y:ev.clientY+scrollTop};
+
+	}
+	for(var i = 0 ; i<54 ;i++){
+			var newDiv = document.createElement('div');
+			var body = document.getElementsByTagName('body')[0];
+			var img = document.createElement('img');
+			img.src = '1.gif';
+			newDiv.appendChild(img);
+			body.appendChild(newDiv);
+		}
+	document.onmousemove = function(ev){	
+
+		var oDiv = document.getElementsByTagName('div');
+
+		for(var i = 0 ; i <oDiv.length ; i++){
+
+			oDiv[i].style.display = 'block';
+
+		}
+
+		var oEvent = ev||event;
+
+		var pos = getPos(oEvent);
+
+		for(var i = oDiv.length-1 ; i > 0; i--){
+
+			oDiv[i].style.left = oDiv[i-1].offsetLeft+'px';
+
+			oDiv[i].style.top = oDiv[i-1].offsetTop+'px';
+
+		}
+
+		oDiv[0].style.left = pos.x+'px';
+
+		oDiv[0].style.top = pos.y+'px';
+
+	}
+			
+				
+	</script>
+</body>
+</html>
